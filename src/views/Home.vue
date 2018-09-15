@@ -15,10 +15,10 @@ export default {
   components: {
     HelloWorld
   },
-  computed:{
-    money(){
-      return this.$store.state.money
+  computed: {
+    money() {
+      return this.$store.state.money;
     }
-  },
+  }
 };
 </script>

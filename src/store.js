@@ -5,16 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    money: 100
+    money: 20000
   },
   mutations: {
-    set_money(state, new_money) {
-      state.money = new_money;
-    }
-  },
-  actions: {
-    set_money({ commit }, new_money) {
-      commit("set_money", new_money);
+    get_money(state, cash) {
+      state.money = state.money - cash;
     }
   }
 });

@@ -1,9 +1,14 @@
 <template>
   <div class="about">
     <div>我银行里有￥{{money}}</div>
-    <div>我钱包里有￥{{wallet}}</div>
-    <input type="text" v-model="v">
-    <button @click="get">取钱</button>
+    <div>
+      取款机：
+      <input type="text" v-model="v">
+      <button @click="get">取钱</button>
+    </div>
+
+    <div>我钱包里有￥{{cash}}</div>
+    
   </div>
 </template>
 <script>
@@ -11,19 +16,19 @@ export default {
   data() {
     return {
       // money: this.$store.state.money,
-      wallet: 0,
-      v:0,
+      cash: 0,
+      v: 0
     };
   },
-  computed:{
-    money(){
-      return this.$store.state.money
+  computed: {
+    money() {
+      return this.$store.state.money;
     }
   },
-  methods:{
-    get(){
-      this.wallet = this.wallet * 1 + this.v * 1
-      this.$store.dispatch('set_money',this.money - this.v)
+  methods: {
+    get() {
+      this.cash += this.v * 1;
+      this.$store.commit("get_money", this.v);
     }
   }
 };
