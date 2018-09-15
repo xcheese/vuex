@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     money: 20000,
+    pay: 0,
     alipay_money: 0
   },
   getters: {
@@ -14,23 +15,26 @@ export default new Vuex.Store({
     },
     tax51: state => {
       return state.money * 0.2;
-    },
-    pay: (state, getters) => {
-      return state.money - getters.tax51 - getters.income_tax;
     }
   },
   mutations: {
     set_money(state, new_money) {
-      state.money = state.money * 1 - new_money * 1;
+      state.money -= new_money * 1;
+    },
+    set_pay(state, new_money) {
+      console.log(123);
+      state.pay += new_money * 1;
     },
     set_alipay_money(state, new_money) {
-      state.alipay_money = state.alipay_money * 1 + new_money * 1;
+      state.alipay_money += new_money * 1;
     }
   },
   actions: {
-    // set_alipay_money(context) {
-    //   context.commit("set_alipay_money");
-    // },
+    set_pay(context, new_money) {
+      console.log(context);
+      // commit("set_pay", new_money);
+      // commit("set_money", new_money);
+    },
     set_alipay_money({ commit }, new_money) {
       alert("假装提交请求，等待一秒，用于支付宝跟银行交涉，扣款");
       setTimeout(() => {

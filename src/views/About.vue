@@ -3,6 +3,7 @@
     <div>月薪税前￥{{money}}</div>
     <div style="color:#999">个税￥{{income_tax}}</div>
     <div style="color:#999">五险一金￥{{tax51}}</div>
+    <div><button @click="get_pay">发工资</button></div>
     <div>月薪税后￥{{pay}}</div>
     <div class="alipay-box">
       <div>
@@ -33,8 +34,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(["money", "alipay_money"]),
-    ...mapGetters(["income_tax", "tax51", "pay"])
+    ...mapState(["money", "pay", "alipay_money"]),
+    ...mapGetters(["income_tax", "tax51"])
     // money() {
     //   return this.$store.state.money;
     // },
@@ -49,6 +50,9 @@ export default {
     // }
   },
   methods: {
+    get_pay() {
+      this.$store.commit("set_pay", this.money - this.tax51 - this.income_tax);
+    },
     get_money() {
       this.$store.dispatch("set_alipay_money", this.v);
     }
